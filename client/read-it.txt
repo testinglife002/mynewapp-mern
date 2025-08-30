@@ -1,0 +1,6 @@
+(*) cloudinary credentials
+Cloud name = dxiykhyyz
+API key = 115561552127196
+API secret = cVTGKi-mxW9-XbpO9X0ryUl_d5A
+API environment variable = CLOUDINARY_URL=cloudinary://115561552127196:cVTGKi-mxW9-XbpO9X0ryUl_d5A@dxiykhyyz
+

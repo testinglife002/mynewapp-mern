@@ -1,0 +1,26 @@
+/* frontend/src/components/Toolbars.css */
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 70px; /* sidebar collapsed width */
+  height: 50px;
+  width: calc(100% - 70px);
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-bottom: 1px solid #ddd;
+  gap: 10px;
+  z-index: 100;
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+.sidebar:hover ~ .toolbar {
+  left: 220px;
+  width: calc(100% - 220px);
+}
+
+.toolbar button {
+  font-size: 14px;
+  padding: 5px 10px;
+}

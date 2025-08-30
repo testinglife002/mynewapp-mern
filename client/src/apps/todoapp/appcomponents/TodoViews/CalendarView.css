@@ -1,0 +1,18 @@
+.calendar-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.react-calendar {
+  border: none;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.tile-todo-count {
+  margin-top: 5px;
+}
+
+.tile-todo-count .badge {
+  font-size: 11px;
+}

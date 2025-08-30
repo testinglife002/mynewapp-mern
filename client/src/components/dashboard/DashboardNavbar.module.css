@@ -1,0 +1,21 @@
+/* src/components/Dashboard/DashboardNavbar.module.css */
+
+.navbar {
+  height: 50px; /* Reduce height */
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.brand {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #ffc107 !important;
+}
+
+.profileImage {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}

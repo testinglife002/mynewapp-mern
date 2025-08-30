@@ -1,0 +1,18 @@
+/* DesignPage.css */
+.design-page {
+  display: flex;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.canvas-container {
+  flex-grow: 1;
+  margin-left: 70px; /* Collapsed width */
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebar:hover ~ .canvas-container {
+  margin-left: 220px; /* Expanded width */
+}
+
+

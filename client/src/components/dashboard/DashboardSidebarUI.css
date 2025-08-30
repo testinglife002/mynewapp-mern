@@ -1,0 +1,52 @@
+/* src/components/dashboard/DashboardSidebarUI.css */
+
+.sidebar {
+  position: fixed;
+  top: 100;
+  left: 0;
+  max-width: 200px;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #212529;
+  color: white;
+  z-index: 1040;
+  transition: width 0.3s ease;
+}
+
+.sidebar-expanded {
+  width: 220px;
+}
+
+.sidebar-collapsed {
+  width: 60px;
+}
+
+.nav-link {
+  padding: 10px 15px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  background-color: #2a2a2a;
+}
+
+.bg-secondary {
+  background-color: #444 !important;
+}
+
+.ms-3 {
+  margin-left: 1rem !important;
+}
+
+/* Optional scroll styling */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}

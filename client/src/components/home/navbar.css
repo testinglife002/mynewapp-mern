@@ -1,0 +1,20 @@
+.navbar{
+  
+  z-index: 99999;
+  background-color: #333333;  /*whichever you want*/
+    opacity: 0.7;           /*0.5 determines transparency value*/ 
+    filter:(opacity=50); 
+}
+.nav-item{
+  margin:0px 10px;
+}
+
+.navbar-nav .nav-link {
+  display: flex;
+  align-items: center;
+}
+.navbar-nav .nav-link.active {
+  color: #0d6efd !important;
+  font-weight: 600;
+  border-bottom: 2px solid #0d6efd;
+}

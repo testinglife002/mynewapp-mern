@@ -1,0 +1,25 @@
+.hero-area {
+  position: relative;
+  flex: 1;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-bg-swiper {
+  height: 100%;
+}
+
+.hero-slide {
+  height: 100%;
+  width: 100%;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3); /* dark overlay */
+}

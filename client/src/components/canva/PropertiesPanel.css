@@ -1,0 +1,36 @@
+/* frontend/src/components/PropertiesPanel.css */
+.properties-panel {
+  position: fixed;
+  top: 50px; /* below toolbar */
+  left: 0;
+  width: 220px;
+  height: calc(100% - 50px);
+  background-color: #f8f8f8;
+  border-right: 1px solid #ddd;
+  padding: 10px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.properties-panel h6 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.properties-panel label {
+  font-size: 12px;
+  margin-top: 10px;
+  display: block;
+}
+
+.properties-panel input[type="number"],
+.properties-panel input[type="color"] {
+  width: 100%;
+  padding: 4px;
+  margin-top: 4px;
+  margin-bottom: 6px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+}

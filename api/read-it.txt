@@ -1,0 +1,9 @@
+(*) in package.json i removed  "type": "commonjs" as i added "type": "module" .
+(*) credentials
+db user = testinglife001
+db password = kXhZxv4IFu4zPrxn
+mongo url = mongodb+srv://testinglife001:kXhZxv4IFu4zPrxn@mynewapp.l1muocc.mongodb.net/?retryWrites=true&w=majority&appName=mynewapp
+
+App (Gmail): TodoApp
+Generated app password
+App passwords: vejf xojb fpmc luiv

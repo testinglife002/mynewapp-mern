@@ -1,0 +1,14 @@
+.todo-container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.card {
+  cursor: grab;
+  transition: background 0.2s ease;
+}
+
+.card:active {
+  cursor: grabbing;
+  background-color: #f5f5f5;
+}

@@ -1,0 +1,7 @@
+# NowToDoS
+----------
+[] implement webapp notification for todos
+[] implement webapp notification for tasks
+[] implement webapp notification for trello
+[] rewrite and make corrections for edit todos 
+[] rewrite and make corrections for TaskCard, edit tasks

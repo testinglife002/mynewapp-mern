@@ -1,0 +1,9 @@
+/* src/styles/CreateBoardModal.css */
+
+.background-preview {
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 0.375rem;
+    background-size: cover;
+    background-position: center;
+}

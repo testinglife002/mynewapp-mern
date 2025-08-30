@@ -1,0 +1,23 @@
+/* For lists */
+.list-actions {
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.25s ease;
+}
+
+.list-item:hover .list-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* CARD ACTION ICONS */
+.card-actions {
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.25s ease;
+}
+
+.card-item:hover .card-actions {
+  opacity: 1;
+  transform: translateX(0);
+}

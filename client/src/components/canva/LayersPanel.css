@@ -1,0 +1,128 @@
+/* frontend/src/components/LayersPanel.css */
+
+
+.layers-panel {
+  position: fixed;
+  top: 50px; /* below toolbar */
+  right: 0;
+  width: 200px;
+  height: calc(100% - 50px);
+  background-color: #fafafa;
+  border-left: 1px solid #ddd;
+  padding: 10px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.layers-panel h6 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.layers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.layer-item {
+  padding: 6px 8px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: grab;
+  font-size: 14px;
+  transition: background 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.layer-item.dragging {
+  background-color: #e0e0e0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.layer-item:hover {
+  background-color: #f0f0f0;
+}
+
+.layer-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: grab;
+  font-size: 12px;
+  transition: background 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.layer-item.dragging {
+  background-color: #e0e0e0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.layer-thumbnail {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  background-color: #f0f0f0;
+}
+
+.layer-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.layer-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: grab;
+  font-size: 12px;
+  transition: background 0.2s ease-in-out, transform 0.1s ease-in-out;
+  position: relative;
+}
+
+.layer-item.locked {
+  opacity: 0.7;
+}
+
+.layer-thumbnail {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  background-color: #f0f0f0;
+}
+
+.layer-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.layer-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.layer-buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+}
+
+

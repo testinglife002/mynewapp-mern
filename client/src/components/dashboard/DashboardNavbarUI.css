@@ -1,0 +1,9 @@
+/* Navbar overrides if needed */
+.navbar {
+  height: 56px;
+  z-index: 1030;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
