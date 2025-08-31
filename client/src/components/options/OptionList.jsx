@@ -1,3 +1,26 @@
+
+import React from "react";
+
+const OptionList = ({ options, onOptionSelected, selectedOption }) => {
+  return (
+    <ul className="list-group mb-4">
+      {options?.map((opt) => (
+        <li
+          key={opt._id}
+          className={`list-group-item ${
+            selectedOption && selectedOption._id === opt._id ? "active" : ""
+          }`}
+          onClick={() => onOptionSelected(opt)}
+          style={{ cursor: "pointer" }}
+        >
+          {opt.name}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+export default OptionList;
 /*
 import React, { useEffect, useState } from "react";
 import EditOptionModal from "./EditOptionModal";
@@ -86,27 +109,5 @@ export default OptionList;
 
 
 
-import React from "react";
-
-const OptionList = ({ options, onOptionSelected, selectedOption }) => {
-  return (
-    <ul className="list-group mb-4">
-      {options?.map((opt) => (
-        <li
-          key={opt._id}
-          className={`list-group-item ${
-            selectedOption && selectedOption._id === opt._id ? "active" : ""
-          }`}
-          onClick={() => onOptionSelected(opt)}
-          style={{ cursor: "pointer" }}
-        >
-          {opt.name}
-        </li>
-      ))}
-    </ul>
-  );
-};
-
-export default OptionList;
 
 

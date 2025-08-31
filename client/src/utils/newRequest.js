@@ -2,10 +2,24 @@
 import axios from "axios";
 
 const newRequest = axios.create({
+  baseURL: import.meta.env.VITE_BACKEND_URL + "/api",
+  withCredentials: true, // ✅ very important for cookies
+});
+
+// ❌ remove Authorization header interceptor
+// because backend uses cookies only
+export default newRequest;
+
+
+
+/*
+const newRequest = axios.create({
   baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`, // ✅ dynamic
   withCredentials: true, // optional if using cookies
 });
+*/
 
+/*
 newRequest.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -13,11 +27,7 @@ newRequest.interceptors.request.use((config) => {
   }
   return config;
 });
-
-export default newRequest;
-
-
-
+*/
 
 /*
 import axios from "axios";

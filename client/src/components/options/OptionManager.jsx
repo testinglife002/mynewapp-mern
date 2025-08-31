@@ -1,6 +1,6 @@
+// OptionManager.jsx
 import React, { useEffect, useState } from "react";
 import newRequest from "../../utils/newRequest";
-
 
 const OptionManager = ({ onSelectOption }) => {
   const [options, setOptions] = useState([]);
@@ -72,15 +72,9 @@ const OptionManager = ({ onSelectOption }) => {
           key={option._id}
           className="d-flex align-items-center justify-content-between mb-2 p-2 border rounded"
         >
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={() => onSelectOption(option)}
-          >
+          <div style={{ cursor: "pointer" }} onClick={() => onSelectOption(option._id)}>
             {editOptionId === option._id ? (
-              <input
-                value={editText}
-                onChange={(e) => setEditText(e.target.value)}
-              />
+              <input value={editText} onChange={(e) => setEditText(e.target.value)} />
             ) : (
               <strong>{option.name}</strong>
             )}
@@ -88,10 +82,7 @@ const OptionManager = ({ onSelectOption }) => {
           <div>
             {editOptionId === option._id ? (
               <>
-                <button
-                  className="btn btn-sm btn-primary me-2"
-                  onClick={() => updateOption(option._id)}
-                >
+                <button className="btn btn-sm btn-primary me-2" onClick={() => updateOption(option._id)}>
                   Save
                 </button>
                 <button
@@ -115,10 +106,7 @@ const OptionManager = ({ onSelectOption }) => {
                 >
                   Edit
                 </button>
-                <button
-                  className="btn btn-sm btn-outline-danger"
-                  onClick={() => deleteOption(option._id)}
-                >
+                <button className="btn btn-sm btn-outline-danger" onClick={() => deleteOption(option._id)}>
                   Delete
                 </button>
               </>

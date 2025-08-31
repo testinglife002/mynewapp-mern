@@ -47,7 +47,7 @@ const Register = () => {
       // await axios.post('/api/auth/register', form, {
       //  withCredentials: true,
       // });
-      console.log(form);
+      // console.log(form);
       await newRequest.post('/auth/register', {
         ...form,
         img: imageUrl,

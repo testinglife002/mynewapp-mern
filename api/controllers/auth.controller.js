@@ -66,12 +66,14 @@ export const login = async (req, res, next) => {
     const { password: pwd, ...info } = user._doc;
 
     res.cookie("accessToken", token, {
-            httpOnly: true,
-            secure: false, 
-            sameSite: "Lax",   // not "None" in local dev
-        })
-        .status(200)
-        .json(info);
+      httpOnly: true,
+      secure: true,            // ✅ must be true on HTTPS (Render)
+      sameSite: "None",        // ✅ allow cross-site cookies
+    })
+    .status(200)
+    .json({ user: info }); // ✅ return user but NOT token
+    // .json(info);
+
   } catch (err) {
     next(err);
   }
@@ -80,10 +82,15 @@ export const login = async (req, res, next) => {
 
 // Logout
 export const logout = (req, res) => {
-  res
-    .clearCookie("accessToken", { httpOnly: true, secure: false, sameSite: "Lax" })
-    .status(200)
-    .json({ message: "User logged out" });
+  
+  res.clearCookie("accessToken", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
+  })
+  .status(200)
+  .json({ message: "User logged out" });
+
 };
   
 

@@ -10,39 +10,22 @@ const Login = ({ setUser }) => {
    const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-        // const res = await axios.post('http://localhost:8800/api/auth/login', form, {
-        //                                withCredentials: true
-        //                            });
-        const res = await newRequest.post("/auth/login", form);
-        const user = res.data;
-        // Save user data in localStorage
-        localStorage.setItem('currentUser', JSON.stringify(user))
-        setUser(user)  // ✅ Update global user state
-        // localStorage.setItem("currentUser", JSON.stringify(res.data));
-        // navigate("/"); 
-        alert('Login success!');
-        // Role-based navigation
-        if (user.role === 'admin') {
-            navigate('/dashboard');
-        } else if (user.isSeller === true) {
-            // navigate('/dashboard/seller');
-            navigate('/');
-        } else {
-            navigate('/'); // or navigate('/');
-        }
+      const res = await newRequest.post("/auth/login", form);
+      const user = res.data.user; // ✅ backend sends { user }
 
-        } catch (err) {
-        console.error(err.response?.data || err.message);
-        alert('Login failed: ' + (err.response?.data || 'Server error'));
-         setError(err.response.data);
-        // console.log(error);
-        // setError(err);
-        console.log(err.response.data);
-        }
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      setUser(user);
 
-  }
+      alert("Login success!");
+      if (user.role === "admin") navigate("/dashboard");
+      else navigate("/");
+    } catch (err) {
+      alert("Login failed: " + (err.response?.data?.message || "Server error"));
+    }
+  };
+
 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100 bg-light"  >

@@ -33,7 +33,7 @@ export const getOptions = async (req, res) => {
 export const updateOption = async (req, res) => {
   try {
     const updated = await Option.findOneAndUpdate(
-      { _id: req.params.id, userId: req.user.id },
+      { _id: req.params.id, userId: req.userId },
       { name: req.body.name },
       { new: true }
     );
@@ -49,7 +49,7 @@ export const deleteOption = async (req, res) => {
   try {
     const deleted = await Option.findOneAndDelete({
       _id: req.params.id,
-      userId: req.user.id,
+      userId: req.userId
     });
     if (!deleted) return res.status(404).json("Option not found or unauthorized");
     res.json({ message: "Option deleted successfully" });
