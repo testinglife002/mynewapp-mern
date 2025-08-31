@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import MDEditor, { commands } from "@uiw/react-md-editor";
 import JoditEditor from "jodit-react";
 import { EditorContext } from "../../apps/notesapp/appcomponents/EditorContext.jsx";
+import newRequest from "../../utils/newRequest.js";
 
 const AllBlogPosts = ({ user }) => {
   const [posts, setPosts] = useState([]);
@@ -26,6 +27,7 @@ const AllBlogPosts = ({ user }) => {
     subcategory: "",
   });
   const [categories, setCategories] = useState([]);
+  const [parentOptions, setParentOptions] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [hashtags, setHashtags] = useState([]);
@@ -42,8 +44,12 @@ const AllBlogPosts = ({ user }) => {
   // Fetch all posts
   const fetchPosts = async () => {
     try {
-      const res = await axios.get("/api/posts");
-      setPosts(Array.isArray(res.data) ? res.data : []);
+      // const res = await axios.get("/api/posts");
+       const res = await newRequest.get('/posts');
+      // setPosts(Array.isArray(res.data) ? res.data : []);
+      // setPosts(res.data);
+      setPosts(Array.isArray(res.data) ? res.data : res.data.posts || []);
+
     } catch (err) {
       console.error(err);
       setPosts([]);
@@ -52,7 +58,7 @@ const AllBlogPosts = ({ user }) => {
     }
   };
 
-  const fetchCategories = async () => {
+  /*const fetchCategories = async () => {
     try {
       const res = await axios.get("/api/categories");
       const cats = Array.isArray(res.data) ? res.data : res.data.categories || [];
@@ -61,18 +67,32 @@ const AllBlogPosts = ({ user }) => {
       console.error(err);
       setCategories([]);
     }
-  };
+  };*/
+
+  const fetchCategories = async () => {
+    try {
+      const res = await newRequest.get('/categories');
+      setCategories(res.data);
+      setParentOptions(res.data.filter(cat => !cat.parentId));
+    } catch (err) {
+      console.error('Failed to fetch categories', err);
+    }
+  };  
 
   useEffect(() => {
     fetchPosts();
     fetchCategories();
   }, []);
 
+  console.log(categories);
+  console.log(posts);
+
   // Delete post
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
     try {
-      await axios.delete(`/api/posts/${id}`);
+      // await axios.delete(`/api/posts/${id}`);
+      await newRequest.delete(`/posts/${id}`);
       setPosts(posts.filter(p => p._id !== id));
     } catch (err) {
       console.error(err);
@@ -132,7 +152,8 @@ const AllBlogPosts = ({ user }) => {
     }
 
     try {
-      await axios.put(`/api/posts/${editingPost._id}`, {
+      // await axios.put(`/api/posts/${editingPost._id}`, {
+      await newRequest.put(`/posts/${editingPost._id}`, {
         ...editForm,
         content: text,
         blocks: blocksData?.blocks || [],

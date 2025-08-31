@@ -66,17 +66,20 @@ export const login = async (req, res, next) => {
     const { password: pwd, ...info } = user._doc;
 
     // ✅ Use environment-aware cookie options
-    const isProd = process.env.NODE_ENV === "production";
+    // const isProd = process.env.NODE_ENV === "production";
 
-    res.cookie("accessToken", token, {
+   /*res.cookie("accessToken", token, {
       httpOnly: true,                       // protect from JS access
       secure: isProd,                       // only true in production (HTTPS)
       sameSite: isProd ? "None" : "Lax",    // "None" for cross-site in prod, "Lax" for localhost
       maxAge: 7 * 24 * 60 * 60 * 1000,      // 7 days
       path: "/",                            // cookie available everywhere
     })
-    .status(200)
-    .json({ user: info });
+    // .status(200)
+    // .json({ user: info });*/
+
+    // ✅ Send token in response (no cookies)
+    res.status(200).json({ user: info, token });
 
   } catch (err) {
     next(err);

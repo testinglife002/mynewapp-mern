@@ -5,6 +5,7 @@ import { Button, Form, InputGroup, Badge } from "react-bootstrap";
 import MDEditor, { commands } from "@uiw/react-md-editor";
 import JoditEditor from "jodit-react";
 import EditorContextProvider, { EditorContext } from "../../apps/notesapp/appcomponents/EditorContext.jsx";
+import newRequest from "../../utils/newRequest.js";
 
 const AddBlogPost = ({ user }) => {
   const [form, setForm] = useState({
@@ -19,6 +20,7 @@ const AddBlogPost = ({ user }) => {
     subcategory: "",
   });
   const [categories, setCategories] = useState([]);
+  const [parentOptions, setParentOptions] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [hashtags, setHashtags] = useState([]);
@@ -41,7 +43,7 @@ const AddBlogPost = ({ user }) => {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchCategories = async () => {
       try {
         const res = await axios.get("/api/categories");
@@ -52,7 +54,25 @@ const AddBlogPost = ({ user }) => {
       }
     };
     fetchCategories();
+  }, []);*/
+
+  // Fetch categories
+  const fetchCategories = async () => {
+    try {
+      const res = await newRequest.get('/categories');
+      setCategories(res.data);
+      setParentOptions(res.data.filter(cat => !cat.parentId));
+    } catch (err) {
+      console.error('Failed to fetch categories', err);
+    }
+  };  
+
+  useEffect(() => {
+    fetchCategories();
   }, []);
+
+   console.log(categories);
+   console.log(parentOptions);
 
 
   // ✅ Handle category change (filter children as subcategories)
@@ -93,6 +113,8 @@ const AddBlogPost = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(form);
+
     let blocksData;
     try {
       blocksData = await editorInstanceRef.current?.save?.();
@@ -105,7 +127,8 @@ const AddBlogPost = ({ user }) => {
     }
 
     try {
-      await axios.post("/api/posts", {
+      console.log(form);
+      /*await axios.post("/api/posts", {
         ...form,
         content: text,
         blocks: blocksData.blocks,
@@ -113,9 +136,20 @@ const AddBlogPost = ({ user }) => {
         hashtags,
         userId: user?._id,
         author: user?.username,
-      });
+      });*/
+      
+      await newRequest.post("/posts", {
+         ...form,
+         content: text,
+         blocks: blocksData.blocks,
+         tags,
+         hashtags,
+         userId: user?._id,
+         author: user?.username,
+       });
+      console.log(form);
 
-      alert("Blog post created!");
+      // alert("Blog post created!");
       setForm({
         title: "",
         trending: "no",
@@ -159,6 +193,12 @@ const AddBlogPost = ({ user }) => {
             <Form.Label>Category</Form.Label>
             <Form.Select value={form.category} onChange={handleCategoryChange} required>
               <option value="">Select Category</option>
+              {/*{categories.filter(c => !c.parentId).map(cat => (
+                <option key={cat._id} value={cat._id}>{cat.name}</option>
+              ))}*/}
+              {/*{parentOptions.map(p => (
+                  <option key={p._id} value={p._id}>{p.name}</option>
+                ))}*/}
               {categories.filter(c => !c.parentId).map(cat => (
                 <option key={cat._id} value={cat._id}>{cat.name}</option>
               ))}

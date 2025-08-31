@@ -1,6 +1,75 @@
-  
+ // newRequest.js 
+// src/utils/newRequest.js
 import axios from "axios";
 
+// ✅ Prefer VITE_BACKEND_URL in production, fallback to local in dev
+const API_URL =
+  import.meta.env.VITE_BACKEND_URL?.trim() ||
+  "http://localhost:8800/api";
+
+// Create axios instance
+const newRequest = axios.create({
+  // baseURL: API_URL,
+  baseURL: "http://localhost:8800/api",
+  withCredentials: true, // important if using cookies
+});
+
+// ✅ Load token from sessionStorage on init (in case of page refresh)
+const token = sessionStorage.getItem("accessToken");
+if (token) {
+  newRequest.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+
+// ✅ Utility: set token after login
+export const setToken = (token) => {
+  if (token) {
+    sessionStorage.setItem("accessToken", token);
+    newRequest.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
+};
+
+// ✅ Utility: clear token on logout
+export const clearToken = () => {
+  sessionStorage.removeItem("accessToken");
+  delete newRequest.defaults.headers.common["Authorization"];
+};
+
+export default newRequest;
+
+
+
+
+
+
+
+/*
+const API_URL =
+  import.meta.env.VITE_BACKEND_URL 
+  || 
+  "http://localhost:8800/api"; // fallback for dev
+
+const newRequest = axios.create({
+   baseURL: API_URL,
+  withCredentials: true, // if using cookies/jwt
+});
+
+// Set Authorization header from sessionStorage
+export const setToken = (token) => {
+  newRequest.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+};
+
+// Remove token (on logout)
+export const clearToken = () => {
+  delete newRequest.defaults.headers.common["Authorization"];
+};
+
+export default newRequest;
+*/
+
+/* === xxx === */
+
+
+/*
 // ✅ Vite injects this at build time
 const isProd = import.meta.env.PROD;
 
@@ -16,7 +85,7 @@ const newRequest = axios.create({
 
 // ❌ no Authorization header, cookies handle auth
 export default newRequest;
-
+*/
 
 /* 
 import axios from "axios";

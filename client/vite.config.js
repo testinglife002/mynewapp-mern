@@ -17,7 +17,7 @@ export default defineConfig({
       // ✅ Only affects local dev (npm run dev)
       '/api': {
         target: 'http://localhost:8800',
-        changeOrigin: true,
+        // changeOrigin: true,
       },
     },
   },

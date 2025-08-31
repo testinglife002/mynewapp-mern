@@ -19,20 +19,21 @@ const router = express.Router();
 // ✅ Only admin can create, update, delete
 // Create category (Admin only)
 router.post("/", verifyToken, verifyAdmin, createCategory);
-// Update category by slug (Admin only)
-router.put("/:slug", verifyToken, verifyAdmin, updateCategory);
-// Delete category by slug (Admin only)
-router.delete("/:slug", verifyToken, verifyAdmin, deleteCategory);
-
-
-// POST /api/categories - Create category
-// router.post('/', createCategory);
 
 // GET /api/categories - Get all (flat)
 router.get('/', getAllCategories);
 
 // GET /api/categories/tree - Get category tree
 router.get('/tree', getCategoryTree);
+
+
+// Update category by slug (Admin only)
+router.put("/:slug", verifyToken, verifyAdmin, updateCategory);
+// Delete category by slug (Admin only)
+router.delete("/:slug", verifyToken, verifyAdmin, deleteCategory);
+
+
+
 
 // Use slug instead of id in URL param
 router.get('/:slug', getCategoryBySlug); // Get single category by slug

@@ -61,6 +61,7 @@ import DashboardCanva from './apps/canva/DashboardCanva'
 import Editor from './apps/canva/Editor'
 import NoteDetails from './apps/notesapp/appcomponents/NoteDetails'
 import GeekfolioHome from './pages/GeekfolioHome'
+import { setToken } from './utils/newRequest'
 
 
 
@@ -81,23 +82,16 @@ const App = () => {
     }
   }, [])
 
-  // App.jsx or MainLayout.jsx
-  /*
-  useEffect(() => {
-    // Only ask if user is logged in and permission not yet granted
-    if (Notification.permission === "default" && user) {
-      Notification.requestPermission().then((permission) => {
-        console.log("Notification permission:", permission);
-      });
-    }
-  }, [user]); // or on mount if already authenticated
+  // console.log(user);
 
   useEffect(() => {
-    if ("Notification" in window && Notification.permission !== "granted") {
-      Notification.requestPermission();
+    const token = sessionStorage.getItem("accessToken")
+    if (token) {
+      setToken(token)
     }
-  }, []);
-  */  
+  }, [])
+
+ 
   useEffect(() => {
     requestNotificationPermission();
   }, []);

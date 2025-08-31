@@ -6,6 +6,8 @@ import Category from '../models/category.model.js';
 // Create new post
 // Create new post
 export const createPost = async (req, res) => {
+  // console.log("📩 Incoming request body:", req.body);
+  // console.log("📩 Incoming user (JWT):", req.user); // if using verifyToken
   try {
     const {
       title,
@@ -22,6 +24,9 @@ export const createPost = async (req, res) => {
       author,
       userId,
     } = req.body;
+
+    // Debug IDs
+    // console.log("Category ID:", category, "Subcategory ID:", subcategory);
 
     // Validate and fetch category
     const cat = await Category.findById(category);
