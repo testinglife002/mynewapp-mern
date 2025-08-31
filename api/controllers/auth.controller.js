@@ -67,8 +67,9 @@ export const login = async (req, res, next) => {
 
     res.cookie("accessToken", token, {
       httpOnly: true,
-      secure: true,            // ✅ must be true on HTTPS (Render)
-      sameSite: "None",        // ✅ allow cross-site cookies
+      secure: true,       // true in production (HTTPS)
+      sameSite: "None",   // allow cross-site from Vercel to Render
+      maxAge: 7 * 24 * 60 * 60 * 1000,  // ✅ 7 days in ms
     })
     .status(200)
     .json({ user: info }); // ✅ return user but NOT token

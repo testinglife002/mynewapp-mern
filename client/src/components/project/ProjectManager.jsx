@@ -16,11 +16,14 @@ const ProjectManager = ({ selectedOptionId }) => {
   const [selectedProjectId, setSelectedProjectId] = useState(null);
 
   const fetchOptions = async () => {
-    try {
+  try {
       const res = await newRequest.get("/options");
-      setOptions(res.data);
+      console.log("Options response:", res.data);
+      const arr = Array.isArray(res.data) ? res.data : res.data.data || [];
+      setOptions(arr);
     } catch (err) {
-      console.error("Error fetching options", err);
+      console.error("Failed to fetch options", err);
+      setOptions([]); // fallback
     }
   };
 
@@ -28,11 +31,15 @@ const ProjectManager = ({ selectedOptionId }) => {
     try {
       const url = optionId ? `/projects?optionId=${optionId}` : "/projects";
       const res = await newRequest.get(url);
-      setProjects(res.data);
+      console.log("Projects response:", res.data);
+      const arr = Array.isArray(res.data) ? res.data : res.data.data || [];
+      setProjects(arr);
     } catch (err) {
       console.error("Error fetching projects", err);
+      setProjects([]); // fallback
     }
   };
+
 
   useEffect(() => {
     fetchOptions();

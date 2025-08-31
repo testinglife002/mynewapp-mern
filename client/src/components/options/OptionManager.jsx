@@ -9,11 +9,14 @@ const OptionManager = ({ onSelectOption }) => {
   const [editText, setEditText] = useState("");
 
   const fetchOptions = async () => {
-    try {
+  try {
       const res = await newRequest.get("/options");
-      setOptions(res.data);
+      console.log("Options response:", res.data);
+      const arr = Array.isArray(res.data) ? res.data : res.data.data || [];
+      setOptions(arr);
     } catch (err) {
       console.error("Failed to fetch options", err);
+      setOptions([]); // fallback
     }
   };
 
