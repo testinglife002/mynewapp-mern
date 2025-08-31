@@ -65,15 +65,18 @@ export const login = async (req, res, next) => {
 
     const { password: pwd, ...info } = user._doc;
 
+    // ✅ Use environment-aware cookie options
+    const isProd = process.env.NODE_ENV === "production";
+
     res.cookie("accessToken", token, {
-      httpOnly: true,
-      secure: true,       // true in production (HTTPS)
-      sameSite: "None",   // allow cross-site from Vercel to Render
-      maxAge: 7 * 24 * 60 * 60 * 1000,  // ✅ 7 days in ms
+      httpOnly: true,                       // protect from JS access
+      secure: isProd,                       // only true in production (HTTPS)
+      sameSite: isProd ? "None" : "Lax",    // "None" for cross-site in prod, "Lax" for localhost
+      maxAge: 7 * 24 * 60 * 60 * 1000,      // 7 days
+      path: "/",                            // cookie available everywhere
     })
     .status(200)
-    .json({ user: info }); // ✅ return user but NOT token
-    // .json(info);
+    .json({ user: info });
 
   } catch (err) {
     next(err);
@@ -81,17 +84,18 @@ export const login = async (req, res, next) => {
 };
 
 
-// Logout
+// ✅ Logout
 export const logout = (req, res) => {
-  
+  const isProd = process.env.NODE_ENV === "production";
+
   res.clearCookie("accessToken", {
     httpOnly: true,
-    secure: true,
-    sameSite: "None",
+    secure: isProd,
+    sameSite: isProd ? "None" : "Lax",
+    path: "/",
   })
   .status(200)
   .json({ message: "User logged out" });
-
 };
   
 

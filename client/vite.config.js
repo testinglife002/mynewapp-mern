@@ -14,8 +14,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://localhost:8800'
-    }
-  }
+      // ✅ Only affects local dev (npm run dev)
+      '/api': {
+        target: 'http://localhost:8800',
+        changeOrigin: true,
+      },
+    },
+  },
 })
+
 
