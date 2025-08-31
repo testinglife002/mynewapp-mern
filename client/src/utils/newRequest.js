@@ -7,12 +7,22 @@ const API_URL =
   import.meta.env.VITE_BACKEND_URL?.trim() ||
   "http://localhost:8800/api";
 
+
+const newRequest = axios.create({
+  baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:8800/api",
+  withCredentials: true, // ✅ sends cookie automatically
+});
+
+
+
+/* 
 // Create axios instance
 const newRequest = axios.create({
   // baseURL: API_URL,
   baseURL: "http://localhost:8800/api",
   withCredentials: true, // important if using cookies
 });
+*/
 
 // ✅ Load token from sessionStorage on init (in case of page refresh)
 const token = sessionStorage.getItem("accessToken");

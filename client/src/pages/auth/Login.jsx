@@ -22,6 +22,7 @@ const Login = ({ setUser }) => {
       setToken(token);
       // Save user info in state if needed
       console.log("Logged in user:", user);
+      console.log("token", token);
 
       localStorage.setItem("currentUser", JSON.stringify(user));
       setUser(user);
